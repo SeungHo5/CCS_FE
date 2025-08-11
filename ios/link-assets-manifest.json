@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/index.js",
+      "sha1": "39de50484b78d1b11110c5753e9b3a3ac63bb39e"
+    },
+    {
       "path": "src/assets/fonts/Jua-Regular.ttf",
       "sha1": "9122d54d461d57735caeeb843b9961a96225468b"
     }
