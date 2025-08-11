@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Dimensions} from 'react-native';
-import BackgroundLayout from '../atoms/image/BackgroundLayout';
-import TabBar from '../organisms/TabBar';
-import SideBar from '../organisms/common/SideBar';
+import BackgroundLayout from '@atoms/image/BackgroundLayout';
+import TabBar from '@organisms/TabBar';
+import SideBar from '@organisms/common/SideBar';
+
 
 const { width } = Dimensions.get('window');
 

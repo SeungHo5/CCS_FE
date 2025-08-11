@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from '../image/Icon';
-import Text from '../text/Text.jsx';
+import Icon from '@atoms/image/Icon';
+import Text from '@atoms/text/Text.jsx';
 
 const ButtonIconText = (props) => {
   const title = props.title || '';

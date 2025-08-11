@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
-import Box from '../../atoms/box/Box';
-import BackgroundOverlay from '../../atoms/image/BackgroundOverlay';
-import ButtonBox from '../../atoms/box/ButtonBox';
+import Box from '@atoms/box/Box';
+import BackgroundOverlay from '@atoms/image/BackgroundOverlay';
+import ButtonBox from '@atoms/box/ButtonBox';
 import { useNavigation } from '@react-navigation/native';
 import { Platform, StatusBar as RNStatusBar } from 'react-native';
-import Icon from '../../atoms/image/Icon';
-import Text from '../../atoms/text/Text.jsx';
+import Icon from '@atoms/image/Icon';
+import Text from '@atoms/text/Text.jsx';
 
 const { width } = Dimensions.get('window');
 
@@ -16,9 +16,9 @@ const SideBar = ({ visible, onClose }) => {
   const getIconSource = (icon) => {
     switch (icon) {
       case 'logo':
-        return require('../../../assets/logo.png');
+        return require('@assets/logo.png');
       default:
-        return require('../../../assets/logo.png');
+        return require('@assets/logo.png');
     }
   };
 
@@ -68,7 +68,7 @@ const SideBar = ({ visible, onClose }) => {
           <ButtonBox contentStyle={styles.userButton} onPress={onClose}>
             <View style={styles.userInfo}>
               <Icon
-                icon={require('../../../assets/logo.png')}
+                icon={require('@assets/logo.png')}
                 size={{width:40,height:40}}
                 style={{ marginRight: 15, borderColor: '#91B7AB', borderWidth: 1, borderRadius: 50 }}
               />
@@ -77,7 +77,7 @@ const SideBar = ({ visible, onClose }) => {
               </Text>
             </View>
             <Icon
-              icon={require('../../../assets/arrow.png')}
+              icon={require('@assets/arrow.png')}
               size={15}
               style={{ marginLeft: 0 }}
             />
@@ -109,7 +109,7 @@ const SideBar = ({ visible, onClose }) => {
                 </Text>
               </View>
               <Icon
-                icon={require('../../../assets/arrow.png')}
+                icon={require('@assets/arrow.png')}
                 size={15}
                 style={{ marginLeft: 0 }}
               />

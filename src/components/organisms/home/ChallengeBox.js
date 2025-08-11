@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import Box from '../../atoms/box/Box';
-import Text from '../../atoms/text/Text.jsx';
-import Icon from '../../atoms/image/Icon';
+import Box from '@atoms/box/Box';
+import Text from '@atoms/text/Text.jsx';
+import Icon from '@atoms/image/Icon';
 import { useNavigation } from '@react-navigation/native';
-import challenges from '../../../assets/data/challengesDummy';
+import challenges from '@assets/data/challengesDummy';
 
 const ChallengeBox = () => {
   const navigation = useNavigation();
@@ -24,13 +24,13 @@ const ChallengeBox = () => {
   const getCategoryIcon = (category) => {
     switch (category) {
       case 'Study':
-        return require('../../../assets/pencil.png');
+        return require('@assets/pencil.png');
       case 'Character':
-        return require('../../../assets/logo.png');
+        return require('@assets/logo.png');
       case 'Coin':
-        return require('../../../assets/coin.png');
+        return require('@assets/coin.png');
       default:
-        return require('../../../assets/logo.png');
+        return require('@assets/logo.png');
     }
   };
 

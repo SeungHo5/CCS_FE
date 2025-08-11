@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Button from '../../atoms/button/Button';
-import Icon from '../../atoms/image/Icon';
+import Button from '@atoms/button/Button';
+import Icon from '@atoms/image/Icon';
 
 const IconButton = ({ 
   iconSource, 

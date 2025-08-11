@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import MainLayout from '../../components/templates/MainLayout';
-import Text from '../../components/atoms/text/Text';
+import MainLayout from '@templates/MainLayout';
+import Text from '@atoms/text/Text';
 
 const CharacterMain = () => {
   return (

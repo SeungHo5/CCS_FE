@@ -1,8 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
-import Text from '../text/Text';
+import { TouchableOpacity, StyleSheet, Text as RNText } from 'react-native';
 
-const Button = (props) => {
+const SimpleButton = (props) => {
   return (
     <TouchableOpacity
       style={[styles.button, props.transparent && {backgroundColor: 'transparent'}, props.center && {alignItems:'center'}, props.style]}
@@ -10,17 +9,16 @@ const Button = (props) => {
       disabled={props.disabled}
       activeOpacity={props.activeOpacity || 0.5}
     >
-      <Text
+      <RNText
         style={[{color: 'white'}, props.transparent && {color: 'black'}, props.textStyle]}
-        type={props.type}
       >
         {props.title}
-      </Text>
+      </RNText>
     </TouchableOpacity>
   );
 };
 
-export default Button;
+export default SimpleButton;
 
 const styles = StyleSheet.create({
   button: {

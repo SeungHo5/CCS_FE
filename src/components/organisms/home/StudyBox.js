@@ -1,32 +1,34 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import Box from '../../atoms/box/Box';
-import ButtonBox from '../../atoms/box/ButtonBox';
-import Text from '../../atoms/text/Text.jsx';
-import Icon from '../../atoms/image/Icon';
+import { StyleSheet, View, ScrollView, Text as RNText, TouchableOpacity } from 'react-native';
+import Box from '@atoms/box/Box';
+import Text from '@atoms/text/Text.jsx';
+import Icon from '@atoms/image/Icon';
 import { useNavigation } from '@react-navigation/native';
-import studyList from '../../../assets/data/studyListDummy';
+import studyList from '@assets/data/studyListDummy';
 
 const StudyBox = () => {
+  console.log('📚 StudyBox 렌더링 시작...');
+  console.log('📚 studyList 데이터:', studyList);
+  
   const navigation = useNavigation();
   
   // 상위 3개 스터디만 표시
   const topStudies = studyList.slice(0, 3);
+  console.log('📚 topStudies:', topStudies);
   
   const getStudyIcon = (iconName) => {
     switch (iconName) {
       case 'studyRoom':
-        return require('../../../assets/studyRoom.png');
+        return require('@assets/studyRoom.png');
       case 'studyRoom2':
-        return require('../../../assets/studyRoom2.png');
+        return require('@assets/studyRoom2.png');
       default:
-        return require('../../../assets/studyRoom.png');
+        return require('@assets/studyRoom.png');
     }
   };
 
   const handleStudyPress = (study) => {
     console.log('스터디 선택:', study.title);
-    // 나중에 스터디 상세 페이지로 이동
   };
 
   const handleViewAll = () => {
@@ -34,65 +36,84 @@ const StudyBox = () => {
     navigation.navigate('StudyList');
   };
 
-  return (
-    <Box
-      title="Study"
-      height={300}
-      style={styles.container} 
-      contentStyle={styles.contentContainer}
-    >
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        {topStudies.map((study, index) => (
-          <ButtonBox 
-            key={study.roomId}
-            style={styles.studyItem}
-            contentStyle={styles.studyContent}
-            onPress={() => handleStudyPress(study)}
-          >
-            <Icon 
-              source={getStudyIcon(study.icon)}
-              size={40}
-              style={styles.studyIcon}
-            />
-            <View style={styles.studyInfo}>
-              <Text type="medium" style={styles.studyTitle} numberOfLines={1}>
-                {study.title}
-              </Text>
-              <View style={styles.studyDetails}>
-                <Text 
-                  type="caption" 
-                  style={[
-                    styles.studyStatus,
-                    study.isStudying ? styles.studying : styles.waiting
-                  ]}
-                >
-                  {study.status}
-                </Text>
-                <Text type="caption" style={styles.personnel}>
-                  {study.personnel}
-                </Text>
-              </View>
-            </View>
-          </ButtonBox>
-        ))}
+  try {
+    return (
+      <Box
+        title="Study"
+        height={300}
+        style={styles.container} 
+        contentStyle={styles.contentContainer}
+        titleBtnIcon={require('@assets/navigate.png')}
+        titleBtnOnPress={handleViewAll}
+        titleBtnStyle={{height: '40%'}}
+      >
+        {/* 임시 디버깅 텍스트 */}
+        <RNText style={{color: 'red', fontSize: 16, margin: 10}}>
+          StudyBox 렌더링됨 - 스터디 {topStudies.length}개
+        </RNText>
         
-        <ButtonBox 
-          style={styles.viewAllButton}
-          contentStyle={styles.viewAllContent}
-          onPress={handleViewAll}
-        >
-          <Text type="medium" style={styles.viewAllText}>
-            모든 스터디 보기
-          </Text>
-          <Icon 
-            source={require('../../../assets/arrow.png')}
-            size={12}
-            style={styles.arrowIcon}
-          />
-        </ButtonBox>
-      </ScrollView>
-    </Box>
-  );
+        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+          {topStudies.map((study, index) => (
+            <TouchableOpacity 
+              key={study.roomId}
+              style={styles.studyItem}
+              onPress={() => handleStudyPress(study)}
+              activeOpacity={0.7}
+            >
+              <Icon 
+                source={getStudyIcon(study.icon)}
+                size={40}
+                style={styles.studyIcon}
+              />
+              <View style={styles.studyInfo}>
+                <Text type="medium" style={styles.studyTitle} numberOfLines={1}>
+                  {study.title}
+                </Text>
+                <View style={styles.studyDetails}>
+                  <Text 
+                    type="caption" 
+                    style={[
+                      styles.studyStatus,
+                      study.isStudying ? styles.studying : styles.waiting
+                    ]}
+                  >
+                    {study.status}
+                  </Text>
+                  <Text type="caption" style={styles.personnel}>
+                    {study.personnel}
+                  </Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          ))}
+          
+          <TouchableOpacity 
+            style={styles.viewAllButton}
+            onPress={handleViewAll}
+            activeOpacity={0.7}
+          >
+            <Text type="medium" style={styles.viewAllText}>
+              모든 스터디 보기
+            </Text>
+            <Icon 
+              source={require('@assets/arrow.png')}
+              size={12}
+              style={styles.arrowIcon}
+            />
+          </TouchableOpacity>
+        </ScrollView>
+      </Box>
+    );
+  } catch (error) {
+    console.error('❌ StudyBox 렌더링 에러:', error);
+    return (
+      <Box title="Study" height={300}>
+        <RNText style={{color: 'red', padding: 20}}>
+          StudyBox 에러: {error.message}
+        </RNText>
+      </Box>
+    );
+  }
 };
 
 export default StudyBox;
@@ -113,8 +134,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#e9ecef',
-  },
-  studyContent: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 12,
@@ -151,8 +170,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#91B7AB',
     marginTop: 8,
     borderRadius: 8,
-  },
-  viewAllContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

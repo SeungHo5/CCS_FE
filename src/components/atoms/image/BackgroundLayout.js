@@ -4,7 +4,7 @@ import { ImageBackground, StyleSheet, View } from 'react-native';
 const BackgroundLayout = ({ children, backgroundImage, overlay = false, style, resizeMode = "cover" }) => {
   return (
     <ImageBackground
-      source={backgroundImage ?? require('../../../assets/background.png')} // 기본 이미지 또는 전달된 이미지
+      source={backgroundImage ?? require('@assets/background.png')} // 기본 이미지 또는 전달된 이미지
       style={[styles.background, style]}
       resizeMode={resizeMode}
     >

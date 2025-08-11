@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import Text from '../text/Text.jsx';
-// import ButtonIcon from '../button/ButtonIcon';
+import Text from '@atoms/text/Text.jsx';
+import ButtonIcon from '@atoms/button/ButtonIcon';
 
 const Box = ({
   title,          // 타이틀
@@ -34,11 +34,13 @@ const Box = ({
         <View style={[styles.titleContainer, titleHeight && {height: titleHeight}, titleContainerStyle]}>
           <Text type={titleType} style={[styles.title, titleStyle]}>{title}</Text>
           <View style={styles.titleBtnContainer}>
-            {/* <ButtonIcon
-              icon={titleBtnIcon}
-              onPress={titleBtnOnPress}
-              style={titleBtnStyle}
-            /> */}
+            {titleBtnIcon && (
+              <ButtonIcon
+                icon={titleBtnIcon}
+                onPress={titleBtnOnPress}
+                style={titleBtnStyle}
+              />
+            )}
           </View>
         </View>
       ) : null}

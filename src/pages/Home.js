@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import MainLayout from '../components/templates/MainLayout';
-import FloatingIcon from '../components/atoms/image/FloatingIcon';
-import StudyBox from '../components/organisms/home/StudyBox';
-import ChallengeBox from '../components/organisms/home/ChallengeBox';
-import RankBox from '../components/organisms/home/RankBox';
+import MainLayout from '@templates/MainLayout';
+import FloatingIcon from '@atoms/image/FloatingIcon';
+import StudyBox from '@organisms/home/StudyBox';
+import ChallengeBox from '@organisms/home/ChallengeBox';
+import RankBox from '@organisms/home/RankBox';
 
 const Home = () => {
   console.log('🏠 Home 풀버전 렌더링 시작...');
@@ -15,7 +15,7 @@ const Home = () => {
     return (
       <MainLayout style={styles.container}>
         <View style={styles.logo}>
-          <FloatingIcon icon={require('../assets/logo.png')} />
+          <FloatingIcon icon={require('@assets/logo.png')} />
         </View>
         <StudyBox />
         <ChallengeBox />

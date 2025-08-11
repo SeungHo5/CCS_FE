@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
-import Icon from './Icon';
+import Icon from '@atoms/image/Icon';
 
 const FloatingIcon = ({icon, style, width = 200, height = 200, toValue=-20, duration=1000}) => {
   console.log('🎆 FloatingIcon 렌더링 시작...');

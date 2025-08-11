@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import ButtonIconText from '../atoms/button/ButtonIconText';
+import ButtonIconText from '@atoms/button/ButtonIconText';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const TabBar = ({ onOpenMenu }) => {
@@ -10,17 +10,17 @@ const TabBar = ({ onOpenMenu }) => {
   const navigation = useNavigation();
   
   const ICONS_ACTIVE = {
-    Home: require('../../assets/homeBtnActive.png'),
-    CharacterMain: require('../../assets/petBtnActive.png'),
-    StudyList: require('../../assets/studyBtnActive.png'),
-    Menu: require('../../assets/menuBtnActive.png'),
+    Home: require('@assets/homeBtnActive.png'),
+    CharacterMain: require('@assets/petBtnActive.png'),
+    StudyList: require('@assets/studyBtnActive.png'),
+    Menu: require('@assets/menuBtnActive.png'),
   };
 
   const ICONS_INACTIVE = {
-    Home: require('../../assets/homeBtn.png'),
-    CharacterMain: require('../../assets/petBtn.png'),
-    StudyList: require('../../assets/studyBtn.png'),
-    Menu: require('../../assets/menuBtn.png'),
+    Home: require('@assets/homeBtn.png'),
+    CharacterMain: require('@assets/petBtn.png'),
+    StudyList: require('@assets/studyBtn.png'),
+    Menu: require('@assets/menuBtn.png'),
   };
 
   const [currentIcons, setCurrentIcons] = useState(ICONS_INACTIVE);

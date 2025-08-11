@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
-import Text from '../text/Text.jsx';
+import Text from '@atoms/text/Text.jsx';
 
 const Input = ({ 
   label, 
