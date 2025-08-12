@@ -2,9 +2,29 @@ import { StyleSheet, View } from 'react-native';
 import Box from '@atoms/box/Box';
 import { useNavigation } from '@react-navigation/native';
 import ChallengeBoard from '@molecules/challenge/ChallengeBoard';
+import challenges from '@assets/data/challengesDummy';
 
 const ChallengeBox = () => {
   const navigation = useNavigation();
+  
+  // 더미데이터에서 각 카테고리별 진행률 계산
+  const calculateProgress = (category) => {
+    const categoryItems = challenges.filter(challenge => challenge.category === category);
+    const completed = categoryItems.filter(challenge => challenge.complete).length;
+    const total = categoryItems.length;
+    return { completed, total };
+  };
+
+  const studyProgress = calculateProgress('Study');
+  const characterProgress = calculateProgress('Character');
+  const coinProgress = calculateProgress('Coin');
+
+  console.log("📊 ChallengeBox 더미데이터 연결:", {
+    study: studyProgress,
+    character: characterProgress, 
+    coin: coinProgress
+  });
+
   return (
     <Box
       title="Challenge"
@@ -15,11 +35,23 @@ const ChallengeBox = () => {
       titleBtnOnPress={() => navigation.navigate('Challenge')}
       titleBtnStyle={{height: '60%'}}
     >
-      <ChallengeBoard category="Study" completedCount="24" totalCount="32"/>
+      <ChallengeBoard 
+        category="Study" 
+        completedCount={studyProgress.completed} 
+        totalCount={studyProgress.total}
+      />
       <View style={styles.borderRight}></View>
-      <ChallengeBoard category="Character" completedCount="7" totalCount="15"/>
+      <ChallengeBoard 
+        category="Character" 
+        completedCount={characterProgress.completed} 
+        totalCount={characterProgress.total}
+      />
       <View style={styles.borderRight}></View>
-      <ChallengeBoard category="Coin" completedCount="12" totalCount="24"/>
+      <ChallengeBoard 
+        category="Coin" 
+        completedCount={coinProgress.completed} 
+        totalCount={coinProgress.total}
+      />
     </Box>
   );
 };

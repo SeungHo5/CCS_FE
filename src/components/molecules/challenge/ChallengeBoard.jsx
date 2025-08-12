@@ -5,24 +5,16 @@ import Box from "@atoms/box/Box";
 import { getChallengeIconSource } from "@utils/challengeIconRegistry";
 
 const ChallengeBoard = (props) => {
-  console.log("🎯 ChallengeBoard props:", props);
-  
-  const iconSource = getChallengeIconSource(props.category+"Board");
-  console.log("📊 ChallengeBoard 아이콘:", {
-    category: props.category,
-    iconKey: props.category+"Board", 
-    iconSource: iconSource
-  });
-
   return (
     <View style={styles.innerView}>
-      <Icon style={styles.icon} icon={iconSource}/>
+      <Icon style={styles.icon} icon={getChallengeIconSource(props.category+"Board")}/>
       <Box
         style={styles.innerBox}
         title={props.category}
         titleType="caption"
         titleContainerStyle={{alignItems: 'center', paddingHorizontal: 0}}
-        titleHeight={20}
+        titleStyle={styles.titleText}
+        titleHeight={30}
         contentStyle={styles.innerBoxContent}
       >
         <Text style={{color:'#91B7AB'}}>{props.completedCount} / {props.totalCount}</Text>
@@ -37,14 +29,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingBottom: 10,
+    marginTop: 5,
   },
   icon: {
     width: '100%',
-    flex: 60,
+    flex: 55, // 아이콘 영역 약간 줄임
   },
   innerBox:{
     width: '60%',
-    height: '30%',
+    height: '35%', // 박스 전체 높이 키움
   },
   innerBoxContent:{
     flex: 1,
@@ -54,4 +47,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
+  titleText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 11,
+  }
 });
