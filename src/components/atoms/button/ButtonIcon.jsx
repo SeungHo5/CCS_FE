@@ -3,17 +3,12 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from '@atoms/image/Icon';
 
 const ButtonIcon = ({ icon, onPress, style, size = 24, disabled = false, ...props }) => {
-  console.log('🔘 ButtonIcon 렌더링:', {
-    icon,
-    size,
-    hasIcon: !!icon
-  });
   
-  // icon이 없으면 렌더링하지 않음
+  // icon이 없으면 조용히 렌더링하지 않음
   if (!icon) {
-    console.warn('⚠️ ButtonIcon: icon이 없습니다!');
     return null;
   }
+  
   return (
     <TouchableOpacity 
       onPress={onPress}

@@ -1,7 +1,6 @@
-import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 
-// 사이드바, 모달 등에서 배경 어둡게 + 바깥 영역 클릭 시 닫히도록
+// 가챠 박스 띄울 때, 배경 어둡게 + 바깥 영역 클릭 시 닫히도록
 const BackgroundOverlay = (props) => {
 
   return (
@@ -20,7 +19,6 @@ const BackgroundOverlay = (props) => {
     </TouchableOpacity>
   );
 };
-
 export default BackgroundOverlay;
 
 const styles = StyleSheet.create({

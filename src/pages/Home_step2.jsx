@@ -2,12 +2,9 @@ import { StyleSheet, View } from 'react-native';
 import MainLayout from '../components/templates/MainLayout';
 import Text from '@atoms/text/Text';
 import FloatingIcon from '@atoms/image/FloatingIcon';
-import ChallengeBox from '@organisms/home/ChallengeBox';
-import StudyBox from '@organisms/home/StudyBox';
-import RankBox from '@organisms/home/RankBox';
 
 const Home = () => {
-  console.log("🏠 Home - 완성된 버전 (RankBox 포함)");
+  console.log("🏠 Home - FloatingIcon 추가 테스트");
 
   return (
     <MainLayout style={styles.container}>
@@ -15,13 +12,7 @@ const Home = () => {
         <FloatingIcon icon={require('@assets/logo.png')} />
       </View>
       <View style={styles.spacer} />
-      <ChallengeBox />
-      <View style={styles.spacer} />
-      <StudyBox />
-      <View style={styles.spacer} />
-      <RankBox />
-      <View style={styles.spacer} />
-      <Text type="title">🎉 완성된 Home 화면!</Text>
+      <Text type="title">FloatingIcon 테스트</Text>
     </MainLayout>
   );
 };
