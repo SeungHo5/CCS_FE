@@ -1,50 +1,36 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import MainLayout from '@templates/MainLayout';
-import Text from '@atoms/text/Text';
+import React, { useState } from 'react';
+import LayoutWidthStatus from '@templates/LayoutWidthStatus';
+import { useNavigation } from '@react-navigation/native';
+import ChallengeList from '@organisms/challenge/ChallengeList'
+import challenges from '@assets/data/challengesDummy';
 
 const Challenge = () => {
-  console.log("📋 Challenge 페이지 렌더링");
+  console.log("📋 Challenge 페이지 - ChallengeList 추가");
+  
+  const navigation = useNavigation();
 
+  const open = (index) => {
+    console.log("📋 챌린지 클릭:", index, challenges[index].title);
+  }
+  
+  const complete = (index) => {
+    console.log("🎯 챌린지 완료:", index);
+  }
+  
   return (
-    <MainLayout style={styles.container}>
-      <View style={styles.content}>
-        <Text type="title" style={styles.title}>Challenge 페이지</Text>
-        <Text type="body" style={styles.description}>
-          챌린지 목록이 여기에 표시됩니다
-        </Text>
-        <Text type="caption" style={styles.note}>
-          (ChallengeBox에서 navigate 버튼으로 이동)
-        </Text>
-      </View>
-    </MainLayout>
+    <LayoutWidthStatus
+      title="Challenge"
+      titleBtnIcon={require('@assets/close.png')}
+      titleBtnOnPress={() => navigation.goBack()}
+      titleBtnStyle={{height: '60%'}}
+    >
+      <ChallengeList 
+        challenges={challenges} 
+        onPress={(index) => open(index)} 
+        onPressComplate={(index) => complete(index)}
+      />
+    </LayoutWidthStatus>
   );
 };
 
 export default Challenge;
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 50,
-  },
-  title: {
-    marginBottom: 20,
-    color: '#333',
-  },
-  description: {
-    textAlign: 'center',
-    marginBottom: 10,
-    color: '#666',
-  },
-  note: {
-    textAlign: 'center',
-    color: '#999',
-  }
-});
