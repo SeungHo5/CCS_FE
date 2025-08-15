@@ -1,0 +1,123 @@
+import { StyleSheet, View } from 'react-native';
+import Icon from "@atoms/image/Icon";
+import ButtonIcon from "@atoms/button/ButtonIcon";
+import Text from '@atoms/text/Text';
+import { Controller, useFormContext } from 'react-hook-form';
+import { VStack } from '@ui/Stack'; // ✅ gap 대체 (대문자 S)
+
+const GroupCreateModalSetting = (props) => {
+    const { control } = useFormContext();
+    return (
+        <View style={styles.settingContainer}>
+            <View style={styles.settingInnerContainer}>
+                <Controller
+                    control={control}
+                    name={"isPublic"}
+                    defaultValue={false}
+                    render={({ field: { value, onChange } }) => (
+                        // ✅ 세로 간격 10 → VStack
+                        <VStack gap={10}>
+                            <View style={styles.settingIconContainer}>
+                                { value
+                                    ? <ButtonIcon
+                                        onPress={() => onChange(false)}
+                                        style={styles.settingIcon}
+                                        icon={require('@assets/img/study/locked.png')}
+                                        activeOpacity={0.8}
+                                    />
+                                    : <ButtonIcon
+                                        onPress={() => onChange(true)}
+                                        style={styles.settingIcon}
+                                        icon={require('@assets/img/study/unlocked.png')}
+                                        activeOpacity={0.8}
+                                    />
+                                }
+                            </View>
+                            <View style={styles.settingValue}>
+                                <Text style={{color:'#91B7AB'}} type="title">
+                                    {value ? "LOCKED" : "UNLOCKED"}
+                                </Text>
+                            </View>
+                        </VStack>
+                    )}
+                />
+            </View>
+
+            <View style={styles.settingInnerContainer}>
+                {/* ✅ 세로 간격 10 → VStack */}
+                <VStack gap={10}>
+                    <View style={styles.settingIconContainer}>
+                        <Icon style={styles.settingIcon} icon={require('@assets/img/study/maxMembers.png')}/>
+                    </View>
+                    <View style={styles.settingValue}>
+                        <Controller
+                            control={control}
+                            name={"maxMembers"}
+                            defaultValue={4}
+                            render={({ field: { value, onChange } }) => (
+                                <View style={styles.maxMembersBtnContainer}>
+                                    <ButtonIcon
+                                        style={styles.maxMembersBtn}
+                                        icon={require('@assets/img/study/minus.png')}
+                                        onPress={() => onChange(Math.max(1, value - 1))}
+                                    />
+                                    <Text style={{color:'#91B7AB'}}>
+                                        {typeof value === 'number' ? value : 4}
+                                    </Text>
+                                    <ButtonIcon
+                                        style={styles.maxMembersBtn}
+                                        icon={require('@assets/img/study/plus.png')}
+                                        onPress={() => onChange(Math.min(20, value + 1))}
+                                    />
+                                </View>
+                            )}
+                        />
+                    </View>
+                </VStack>
+            </View>
+        </View>
+    );
+};
+export default GroupCreateModalSetting;
+
+const styles = StyleSheet.create({
+    settingContainer:{
+        width: '100%',
+        flex:45,
+        flexDirection: 'row',
+    },
+    // ❌ gap 제거 (VStack이 처리)
+    settingInnerContainer:{
+        width: '100%',
+        flex: 1,
+        paddingHorizontal: 10,
+        // gap: 10,
+    },
+    settingIconContainer:{
+        flex: 1,
+        alignItems:'flex-end',
+        flexDirection: 'row',
+    },
+    settingIcon:{
+        width: '100%',
+        aspectRatio: 1,
+    },
+    settingValue:{
+        height: '20%', // 부모 높이가 명확하지 않으면 0 될 수 있음 (문제 생기면 toDP로 전환)
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    maxMembersBtnContainer:{
+        backgroundColor: 'white',
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around', // gap과 중복 아님 (내부 수평 정렬 용도)
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#91B7AB',
+        borderRadius: 50,
+    },
+    maxMembersBtn:{
+        height: '70%', // 부모 기준 퍼센트 유지
+    },
+});

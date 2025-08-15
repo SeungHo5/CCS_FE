@@ -5,12 +5,7 @@ const RankBox = () => {
 
   return (
     <>
-      <Box 
-        title="Rank" 
-        height={500} 
-        contentStyle={styles.contentContainer}
-        titleBtnIcon={null}
-      >
+      <Box title="Rank" height={500} contentStyle={styles.contentContainer}>
       </Box>
     </>
   );

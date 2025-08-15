@@ -2,24 +2,27 @@ module.exports = function(api) {
   api.cache(true);
   return {
     presets: ['module:metro-react-native-babel-preset'],
-    plugins: [
+    plugins:  [
       [
         'module-resolver',
         {
-          root: ['./'],
+          root: ['./src'],
           alias: {
-            '@assets': './src/assets',
-            '@pages': './src/pages',
+            '@stores': './src/stores',
+            '@components': './src/components',
             '@atoms': './src/components/atoms',
             '@molecules': './src/components/molecules',
-            '@components': './src/components',
             '@organisms': './src/components/organisms',
             '@templates': './src/components/templates',
+            '@assets': './src/assets',
+            '@pages': './src/pages',
             '@apis': './src/components/apis',
             '@utils': './src/utils',
             '@services': './src/services',
-            '@navigation': './src/navigation',  // 추가!
+            '@navigation': './src/navigation',
+            '@ui': './src/ui',
           },
+          extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
         },
       ],
       [
@@ -30,6 +33,7 @@ module.exports = function(api) {
           allowUndefined: false,
         },
       ],
+      'react-native-reanimated/plugin', // 반드시 맨 마지막
     ],
   };
 };

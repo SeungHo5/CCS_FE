@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Dimensions} from 'react-native';
 import BackgroundLayout from '@atoms/image/BackgroundLayout';
 import TabBar from '@organisms/TabBar';
+import SideBar from '@organisms/common/SideBar';
+
 
 const { width } = Dimensions.get('window');
 
 const MainLayout = ({ children, style }) => {
-  console.log("🏗️ MainLayout (안전한 TabBar 추가)");
+  const [isSidebarVisible, setSidebarVisible] = useState(false);
 
   return (
     <>
@@ -14,8 +16,10 @@ const MainLayout = ({ children, style }) => {
         <ScrollView style={{width: '100%'}} contentContainerStyle={[{paddingBottom: 60}, style]}>
           {children}
         </ScrollView >
-        <TabBar />
+        <TabBar onOpenMenu={() => setSidebarVisible(true)} />
       </BackgroundLayout>
+
+      <SideBar visible={isSidebarVisible} onClose={() => setSidebarVisible(false)} />
     </>
   );
 };

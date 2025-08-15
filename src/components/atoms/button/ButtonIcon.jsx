@@ -1,39 +1,31 @@
+// src/components/atoms/ButtonIcon/index.jsx
 import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from '@atoms/image/Icon';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-const ButtonIcon = ({ icon, onPress, style, size = 24, disabled = false, ...props }) => {
-  
-  // icon이 없으면 조용히 렌더링하지 않음
-  if (!icon) {
+const ButtonIcon = ({resizeMode="contain", ...props}) => {
+  const width = props.size?.width || 24;
+  const height = props.size?.height || 24;
+
+  if (props.icon){
+    return (
+      <TouchableOpacity onPress={props.onPress} style={[{ width, height }, props.style]} activeOpacity={props.activeOpacity || 0.5}>
+        <Image
+          source={props.icon}
+          style={styles.img}
+          resizeMode={resizeMode}
+        />
+      </TouchableOpacity>
+    );
+  } else {
     return null;
   }
-  
-  return (
-    <TouchableOpacity 
-      onPress={onPress}
-      disabled={disabled}
-      style={[styles.button, style]}
-      activeOpacity={0.7}
-      {...props}
-    >
-      <Icon 
-        source={icon}
-        size={size}
-        style={styles.icon}
-      />
-    </TouchableOpacity>
-  );
 };
 
 export default ButtonIcon;
 
 const styles = StyleSheet.create({
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  icon: {
-    // 기본 아이콘 스타일
+  img: {
+    width: '100%',
+    height: '100%',
   },
 });

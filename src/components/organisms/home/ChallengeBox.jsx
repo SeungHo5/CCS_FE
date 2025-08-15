@@ -2,29 +2,19 @@ import { StyleSheet, View } from 'react-native';
 import Box from '@atoms/box/Box';
 import { useNavigation } from '@react-navigation/native';
 import ChallengeBoard from '@molecules/challenge/ChallengeBoard';
-import challenges from '@assets/data/challengesDummy';
+import { getChallengeProgressByCategory } from '@services/characterAPI';
+import { useEffect, useState } from 'react';
 
 const ChallengeBox = () => {
   const navigation = useNavigation();
-  
-  // 더미데이터에서 각 카테고리별 진행률 계산
-  const calculateProgress = (category) => {
-    const categoryItems = challenges.filter(challenge => challenge.category === category);
-    const completed = categoryItems.filter(challenge => challenge.complete).length;
-    const total = categoryItems.length;
-    return { completed, total };
+  const [challenge, setChallenge] = useState();
+  const getChallengeProgressByCategoryAPICall = async() => {
+    const res = await getChallengeProgressByCategory();
+    if(res.success) setChallenge(res.data);
   };
-
-  const studyProgress = calculateProgress('Study');
-  const characterProgress = calculateProgress('Character');
-  const coinProgress = calculateProgress('Coin');
-
-  console.log("📊 ChallengeBox 더미데이터 연결:", {
-    study: studyProgress,
-    character: characterProgress, 
-    coin: coinProgress
-  });
-
+  useEffect(()=>{
+    getChallengeProgressByCategoryAPICall();
+  },[]);
   return (
     <Box
       title="Challenge"
@@ -35,23 +25,11 @@ const ChallengeBox = () => {
       titleBtnOnPress={() => navigation.navigate('Challenge')}
       titleBtnStyle={{height: '60%'}}
     >
-      <ChallengeBoard 
-        category="Study" 
-        completedCount={studyProgress.completed} 
-        totalCount={studyProgress.total}
-      />
+      <ChallengeBoard category="Study" progress={challenge?.[2].progress}/>
       <View style={styles.borderRight}></View>
-      <ChallengeBoard 
-        category="Character" 
-        completedCount={characterProgress.completed} 
-        totalCount={characterProgress.total}
-      />
+      <ChallengeBoard category="Character" progress={challenge?.[3].progress}/>
       <View style={styles.borderRight}></View>
-      <ChallengeBoard 
-        category="Coin" 
-        completedCount={coinProgress.completed} 
-        totalCount={coinProgress.total}
-      />
+      <ChallengeBoard category="Coin" progress={challenge?.[4].progress}/>
     </Box>
   );
 };

@@ -1,42 +1,36 @@
 import { StyleSheet, View } from 'react-native';
 import MainLayout from '../components/templates/MainLayout';
-import Text from '@atoms/text/Text';
 import FloatingIcon from '@atoms/image/FloatingIcon';
-import ChallengeBox from '@organisms/home/ChallengeBox';
 import StudyBox from '@organisms/home/StudyBox';
+import ChallengeBox from '@organisms/home/ChallengeBox';
 import RankBox from '@organisms/home/RankBox';
+import { VStack } from '@ui/Stack'; // ✅ gap 대체 (대문자 S)
 
 const Home = () => {
-  console.log("🏠 Home - 완성된 버전 (RankBox 포함)");
-
-  return (
-    <MainLayout style={styles.container}>
-      <View style={styles.logo}>
-        <FloatingIcon icon={require('@assets/logo.png')} />
-      </View>
-      <View style={styles.spacer} />
-      <ChallengeBox />
-      <View style={styles.spacer} />
-      <StudyBox />
-      <View style={styles.spacer} />
-      <RankBox />
-      <View style={styles.spacer} />
-      <Text type="title">🎉 완성된 Home 화면!</Text>
-    </MainLayout>
-  );
+    return (
+        <MainLayout style={styles.containerNoGap}>
+            {/* ✅ gap: 20 → VStack gap={20} */}
+            <VStack gap={20} align="center">
+                <View style={styles.logo}>
+                    <FloatingIcon icon={require('@assets/logo.png')} />
+                </View>
+                <ChallengeBox />
+                <StudyBox />
+                <RankBox />
+            </VStack>
+        </MainLayout>
+    );
 };
 export default Home;
 
 const styles = StyleSheet.create({
-  container:{
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  logo:{
-    height: 300,
-    justifyContent: 'center',
-  },
-  spacer: {
-    height: 20,
-  },
+    // ❌ gap 제거 (VStack이 처리)
+    containerNoGap: {
+        paddingHorizontal: 20,
+        alignItems: 'center',
+    },
+    logo: {
+        height: 300,
+        justifyContent: 'center',
+    },
 });

@@ -4,11 +4,11 @@ import ChallengeListButton from "@molecules/challenge/ChallengeListButton";
 const ChallengeList = (props) => {
   const getIconSource = (name) => {
     switch (name) {
-      case 'pencil':
+      case 2:
         return require('@assets/pencil.png');
-      case 'logo':
+      case 3:
         return require('@assets/logo.png');
-      case 'coin':
+      case 4:
         return require('@assets/coin.png');
     }
   };
@@ -16,16 +16,16 @@ const ChallengeList = (props) => {
   return (
     <ScrollView contentContainerStyle={styles.container} scrollEnabled={props.scrollEnabled}>
       {props.challenges.map((item, index) => (
+        item.categoryId !== 1 &&
         <ChallengeListButton
-          onPressComplate={() => props.onPressComplate(index)}
+          onPressComplate={() => props.onPressComplate(item.userChallengeProgressId)}
           key={index}
-          icon={getIconSource(item.icon)}
+          icon={getIconSource(item.categoryId)}
           title={item.title}
           caption={item.caption}
-          coin={item.coin.toString()}
-          complete={item.complete}
+          coin={item.amount}
+          complete={item.isRewarded}
           onPress={() => props.onPress(index)}
-          disabled={props.disabled}
         />
       ))}
     </ScrollView>

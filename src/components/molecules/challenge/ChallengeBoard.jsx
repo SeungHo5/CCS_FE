@@ -1,45 +1,61 @@
-import { StyleSheet, View } from "react-native";
-import Text from '@atoms/text/Text'
-import Icon from '@atoms/image/Icon'
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import Text from '@atoms/text/Text';
+import Icon from '@atoms/image/Icon';
 import Box from "@atoms/box/Box";
-import { getChallengeIconSource } from "@utils/challengeIconRegistry";
+import { getChallengeBoardImage } from "@utils/imageMapping";
+import { useNavigation } from "@react-navigation/native";
+import { VStack } from '@ui/Stack'; // ✅ 추가: gap 대체용
 
 const ChallengeBoard = (props) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.innerView}>
-      <Icon style={styles.icon} icon={getChallengeIconSource(props.category+"Board")}/>
-      <Box
-        style={styles.innerBox}
-        title={props.category}
-        titleType="caption"
-        titleContainerStyle={{alignItems: 'center', paddingHorizontal: 0}}
-        titleStyle={styles.titleText}
-        titleHeight={30}
-        contentStyle={styles.innerBoxContent}
+      <TouchableOpacity
+          style={styles.innerView}
+          onPress={() => navigation.navigate('Challenge')}
+          activeOpacity={0.8}
       >
-        <Text style={{color:'#91B7AB'}}>{props.completedCount} / {props.totalCount}</Text>
-      </Box>
-    </View>
+        {/* ✅ gap: 5 → VStack gap={5}로 세로 간격 처리 */}
+        <VStack gap={5} style={styles.stack}>
+          <Icon style={styles.icon} icon={getChallengeBoardImage(props.category + "Board")} />
+
+          <Box
+              style={styles.innerBox}
+              title={props.category}
+              titleType="caption"
+              titleContainerStyle={{ alignItems: 'center', paddingHorizontal: 0 }}
+              titleHeight={'40%'}
+              contentStyle={styles.innerBoxContent}
+          >
+            <Text style={{ color: '#91B7AB' }}>{props.progress}</Text>
+          </Box>
+        </VStack>
+      </TouchableOpacity>
   );
 };
 export default ChallengeBoard;
 
 const styles = StyleSheet.create({
-  innerView:{
+  innerView: {
     flex: 1,
     alignItems: 'center',
     paddingBottom: 10,
-    marginTop: 5,
+    // gap: 5,  // ❌ 제거: VStack이 처리
+  },
+  // VStack 래퍼에 줄 스타일
+  stack: {
+    width: '100%',
+    alignItems: 'center',
+    flex: 1,
   },
   icon: {
     width: '100%',
-    flex: 55, // 아이콘 영역 약간 줄임
+    flex: 60,  // ✅ 퍼센트/플렉스는 유지 (부모 높이가 명확해야 기대대로 동작)
   },
-  innerBox:{
+  innerBox: {
     width: '60%',
-    height: '35%', // 박스 전체 높이 키움
+    height: '30%', // ✅ 퍼센트 유지
   },
-  innerBoxContent:{
+  innerBoxContent: {
     flex: 1,
     backgroundColor: 'white',
     borderColor: '#91B7AB',
@@ -47,9 +63,4 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
-  titleText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    fontSize: 11,
-  }
 });
